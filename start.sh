@@ -19,4 +19,4 @@ docker run -it --rm \
        -p 9630:9630 \
        --user 1000 \
        --name dev \
-       wkok/dev:2022-06-04
+       wkok/dev:2022-06-04 emacs
