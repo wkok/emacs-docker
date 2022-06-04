@@ -7,6 +7,7 @@ My emacs + clojure development docker container image
 - Emacs 28.1
 - Open JDK 17
 - Clojure 1.11
+- Clojure LSP
 - Node 16
 
 ## Why
