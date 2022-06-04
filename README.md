@@ -22,6 +22,10 @@ Ensures a consistent development environment across workstations
 
 `bash <(curl -s https://raw.githubusercontent.com/wkok/emacs-docker/main/start.sh)`
 
+Note: This script mounts your $HOME into the container's $HOME so from within emacs, you'll have access to the same files as your host.
+
+(Download & edit this start.sh if you want to change volume & port mappings)
+
 ## Optionally set up SSH auth with Github
 
 Within emacs, start a shell
