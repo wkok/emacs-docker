@@ -20,7 +20,7 @@ Ensures a consistent development environment across workstations
 
 ## Start the container with GUI emacs
 
-bash <(curl -s https://raw.githubusercontent.com/wkok/emacs-docker/main/start.sh)
+`bash <(curl -s https://raw.githubusercontent.com/wkok/emacs-docker/main/start.sh)`
 
 ## Optionally set up SSH auth with Github
 
@@ -28,11 +28,11 @@ Within emacs, start a shell
 
 `M-x shell`
 
-Generate your private/public key pair
+generate your private/public key pair
 
 `ssh-keygen -t ed25519 -C "your_email@example.com"`
 
-Copy your public key to your clipboard
+copy your public key to the clipboard
 
 `cat ~/.ssh/id_ed25519.pub`
 
@@ -44,18 +44,18 @@ Within emacs, start a shell
 
 `M-x shell`
 
-Clone this repo
+clone this repo
 
 `git clone git@github.com:wkok/emacs-docker.git $HOME/src/emacs-docker`
 
-Run the init script
+run the init script
 
 `./src/emacs-docker/init.sh`
 
-Quit emacs
+quit emacs
 
 `C-x c`
 
-Start emacs
+start emacs
 
 `bash <(curl -s https://raw.githubusercontent.com/wkok/emacs-docker/main/start.sh)`
