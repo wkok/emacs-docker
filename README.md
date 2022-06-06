@@ -29,8 +29,10 @@ Note: This script mounts your `$HOME` into the container's `$HOME` so from withi
 
 ## Set up your GIT identity
 
-`git config --global user.email "you@example.com"`
-`git config --global user.name "Your Name"`
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```bash
 
 ## Optionally set up SSH auth with Github
 
