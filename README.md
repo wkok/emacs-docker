@@ -23,9 +23,14 @@ Ensures a consistent development environment across workstations
 
 `bash <(curl -s https://raw.githubusercontent.com/wkok/emacs-docker/main/start.sh)`
 
-Note: This script mounts your $HOME into the container's $HOME so from within emacs, you'll have access to the same files as your host.
+Note: This script mounts your `$HOME` into the container's `$HOME` so from within emacs, you'll have access to the same files as your host.
 
-(Download & edit this start.sh if you want to change volume & port mappings)
+(Download & edit this `start.sh` if you want to change volume & port mappings)
+
+## Set up your GIT identity
+
+`git config --global user.email "you@example.com"`
+`git config --global user.name "Your Name"`
 
 ## Optionally set up SSH auth with Github
 
