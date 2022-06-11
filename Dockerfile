@@ -63,6 +63,7 @@ RUN unzip /tmp/clojure-lsp.zip -d /usr/local/bin
 RUN useradd -G sudo -u 1000 --create-home dev
 
 ENV HOME /home/dev
+ENV SHELL /bin/bash
 
 WORKDIR $HOME
 
