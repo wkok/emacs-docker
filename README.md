@@ -11,6 +11,7 @@ My emacs + clojure development docker container image
 - Babashka 0.8.157
 - Node 16
 - Firebase CLI
+- PlantUML 1.2022.6
 
 ## Why
 
@@ -28,6 +29,12 @@ Ensures a consistent development environment across workstations
 Note: This script mounts your `$HOME` into the container's `$HOME` so from within emacs, you'll have access to the same files as your host.
 
 (Download & edit this `start.sh` if you want to change volume & port mappings)
+
+## User
+
+The default password for the developer user is changeme
+
+It is recommended to change this password using the `passwd` utility
 
 ## Set up your GIT identity
 
