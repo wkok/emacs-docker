@@ -9,6 +9,7 @@ My emacs + clojure development docker container image
 - Clojure 1.11
 - Clojure LSP
 - Node 16
+- Firebase CLI
 
 ## Why
 

@@ -19,7 +19,7 @@ ARG CC=/usr/bin/gcc-10 CXX=/usr/bin/gcc-10
 ## Download dependencies ##
 ###########################
 RUN apt-get update && \
-    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap
+    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag
 
 ##############################
 # Download and extract emacs #
@@ -57,12 +57,17 @@ RUN ./linux-install-$CLOJURE_VERSION.sh && \
 RUN wget -O /tmp/clojure-lsp.zip https://github.com/clojure-lsp/clojure-lsp/releases/download/$CLOJURE_LSP_VERSION/clojure-lsp-native-linux-amd64.zip
 RUN unzip /tmp/clojure-lsp.zip -d /usr/local/bin
 
-###########################
-# Set up dev user profile #
-###########################
-RUN useradd -G sudo -u 1000 --create-home dev
+########################
+# Install Firebase CLI #
+########################
+RUN curl -sL https://firebase.tools | bash
 
-ENV HOME /home/dev
+#################################
+# Set up developer user profile #
+#################################
+RUN useradd -G sudo -u 1000 --create-home developer
+
+ENV HOME /home/developer
 ENV SHELL /bin/bash
 
 WORKDIR $HOME

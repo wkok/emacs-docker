@@ -13,10 +13,10 @@
 
 docker run -it --rm \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
-       -v /home/wrk:/home/dev \
+       -v /home/wrk:/home/developer \
        -e DISPLAY=$DISPLAY \
        -p 8280:8280 \
        -p 9630:9630 \
        --user 1000 \
        --name dev \
-       wkok/dev:2022-06-11 emacs
+       wkok/dev:2022-07-17 emacs

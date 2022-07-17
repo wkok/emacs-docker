@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build --tag wkok/dev:2022-06-11 .
+docker build --tag wkok/dev:2022-07-17 .
