@@ -11,6 +11,7 @@ ARG CLOJURE_LSP_VERSION=2022.05.31-17.35.50
 ARG BABASHKA_VERSION=0.8.157
 ARG NODE_VERSION=16.x
 ARG PLANTUML_VERSION=1.2022.6
+ARG YARN_VERSION=1.22.19
 
 #######################################
 # Needed for emacs native compilation #
@@ -76,6 +77,10 @@ RUN curl -sL https://firebase.tools | bash
 RUN mkdir -p /opt/plantuml && \
     wget -O /opt/plantuml/plantuml.jar https://github.com/plantuml/plantuml/releases/download/v$PLANTUML_VERSION/plantuml-$PLANTUML_VERSION.jar
 
+########
+# Yarn #
+########
+RUN npm install --global yarn@$YARN_VERSION
 
 #################################
 # Set up developer user profile #
