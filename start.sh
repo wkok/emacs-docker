@@ -8,6 +8,7 @@
 # Port mappings:
 # - 8280 shadow-cljs http server
 # - 9630 shadow-cljs ws server
+# - 9005 firebase cli auth
 #
 #############################################################
 
@@ -17,6 +18,7 @@ docker run -it --rm \
        -e DISPLAY=$DISPLAY \
        -p 8280:8280 \
        -p 9630:9630 \
+       -p 9005:9005 \
        --user 1000 \
        --name dev \
        wkok/dev:2022-07-17 emacs
