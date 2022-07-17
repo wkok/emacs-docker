@@ -7,7 +7,8 @@ My emacs + clojure development docker container image
 - Emacs 28.1
 - Open JDK 17
 - Clojure 1.11
-- Clojure LSP
+- Clojure LSP 2022.05.31-17.35.50
+- Babashka 0.8.157
 - Node 16
 - Firebase CLI
 

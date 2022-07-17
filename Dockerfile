@@ -8,6 +8,7 @@ ARG EMACS_VERSION=28.1
 ARG JAVA_VERSION=17
 ARG CLOJURE_VERSION=1.11.1.1113
 ARG CLOJURE_LSP_VERSION=2022.05.31-17.35.50
+ARG BABASHKA_VERSION=0.8.157
 ARG NODE_VERSION=16.x
 
 #######################################
@@ -56,6 +57,12 @@ RUN ./linux-install-$CLOJURE_VERSION.sh && \
 ##############################
 RUN wget -O /tmp/clojure-lsp.zip https://github.com/clojure-lsp/clojure-lsp/releases/download/$CLOJURE_LSP_VERSION/clojure-lsp-native-linux-amd64.zip
 RUN unzip /tmp/clojure-lsp.zip -d /usr/local/bin
+
+####################
+# Install Babashka #
+####################
+RUN wget -O /tmp/babashka.tar.gz https://github.com/babashka/babashka/releases/download/v$BABASHKA_VERSION/babashka-$BABASHKA_VERSION-linux-amd64.tar.gz && \
+    tar -xf /tmp/babashka.tar.gz -C /usr/local/bin
 
 ########################
 # Install Firebase CLI #
