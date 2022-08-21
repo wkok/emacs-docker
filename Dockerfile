@@ -13,6 +13,8 @@ ARG NODE_VERSION=16.x
 ARG PLANTUML_VERSION=1.2022.6
 ARG YARN_VERSION=1.22.19
 
+ARG USER=developer
+
 #######################################
 # Needed for emacs native compilation #
 #######################################
@@ -22,7 +24,7 @@ ARG CC=/usr/bin/gcc-10 CXX=/usr/bin/gcc-10
 ## Download dependencies ##
 ###########################
 RUN apt-get update && \
-    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz
+    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server
 
 ##############################
 # Download and extract emacs #
@@ -82,15 +84,25 @@ RUN mkdir -p /opt/plantuml && \
 ########
 RUN npm install --global yarn@$YARN_VERSION
 
-#################################
-# Set up developer user profile #
-#################################
-RUN useradd -G sudo -u 1000 --create-home -p $(echo "changeme" | openssl passwd -1 -stdin) developer
+#######################
+# Set up user profile #
+#######################
+RUN useradd -G sudo -u 1000 --create-home -p $(echo "changeme" | openssl passwd -1 -stdin) $USER
 
-ENV HOME /home/developer
-ENV SHELL /bin/bash
+###########################
+# Enable no password sudo #
+###########################
+RUN echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER
 
-WORKDIR $HOME
+################################
+# Allow X11-Forwarding via SSH #
+################################
+RUN echo "Match User $USER" >> /etc/ssh/sshd_config && \
+    echo "	AllowAgentForwarding yes" >> /etc/ssh/sshd_config && \
+    echo "	AllowTcpForwarding yes" >> /etc/ssh/sshd_config && \
+    echo "	X11DisplayOffset 10" >> /etc/ssh/sshd_config && \
+    echo "	X11UseLocalhost no" >> /etc/ssh/sshd_config && \
+    echo "	X11Forwarding yes" >> /etc/ssh/sshd_config
 
 ###########
 # Cleanup #
@@ -99,3 +111,10 @@ RUN rm /tmp/emacs.tar.gz && \
     rm -rf /tmp/emacs-$EMACS_VERSION && \
     rm /tmp/clojure-lsp.zip && \
     rm -rf /var/lib/apt/lists/*
+
+ENV HOME /home/$USER
+ENV SHELL /bin/bash
+
+WORKDIR $HOME
+
+ENTRYPOINT sudo service ssh start && /bin/bash

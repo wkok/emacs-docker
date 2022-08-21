@@ -10,6 +10,8 @@
 # - 9630 shadow-cljs ws server
 # - 9005 firebase cli auth
 # - 2021 juxt site
+# - 5432 portal
+# - 22 ssh
 #
 #############################################################
 
@@ -21,6 +23,8 @@ docker run -it --rm \
        -p 9630:9630 \
        -p 9005:9005 \
        -p 2021:2021 \
+       -p 5432:5432 \
+       -p 22:22 \
        --user 1000 \
        --name dev \
-       wkok/dev:2022-07-17 emacs
+       wkok/dev:2022-08-21
