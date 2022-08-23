@@ -15,7 +15,7 @@
 #
 #############################################################
 
-docker run -it --rm \
+docker run -it --privileged --rm \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
        -v /home/wrk:/home/developer \
        -e DISPLAY=$DISPLAY \
@@ -27,4 +27,4 @@ docker run -it --rm \
        -p 22:22 \
        --user 1000 \
        --name dev \
-       wkok/dev:2022-08-21
+       wkok/dev:2022-08-23
