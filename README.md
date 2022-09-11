@@ -9,6 +9,7 @@ My emacs + clojure development docker container image
 - Clojure 1.11
 - Clojure LSP 2022.05.31-17.35.50
 - Babashka 0.8.157
+- CLJ Kondo 2022.09.08
 - Node 16
 - Yarn 1.22.19
 - Firebase CLI

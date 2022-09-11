@@ -9,6 +9,7 @@ ARG JAVA_VERSION=17
 ARG CLOJURE_VERSION=1.11.1.1113
 ARG CLOJURE_LSP_VERSION=2022.05.31-17.35.50
 ARG BABASHKA_VERSION=0.8.157
+ARG CLJ_KONDO_VERSION=2022.09.08
 ARG NODE_VERSION=16.x
 ARG PLANTUML_VERSION=1.2022.6
 ARG YARN_VERSION=1.22.19
@@ -67,6 +68,13 @@ RUN unzip /tmp/clojure-lsp.zip -d /usr/local/bin
 ####################
 RUN wget -O /tmp/babashka.tar.gz https://github.com/babashka/babashka/releases/download/v$BABASHKA_VERSION/babashka-$BABASHKA_VERSION-linux-amd64.tar.gz && \
     tar -xf /tmp/babashka.tar.gz -C /usr/local/bin
+
+#####################
+# Install clj-kondo #
+#####################
+RUN curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/script/install-clj-kondo && \
+    chmod +x install-clj-kondo && \
+    ./install-clj-kondo --version $CLJ_KONDO_VERSION
 
 ########################
 # Install Firebase CLI #
