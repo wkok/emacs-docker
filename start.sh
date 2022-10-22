@@ -27,4 +27,4 @@ docker run -it --privileged --rm \
        -p 22:22 \
        --user 1000 \
        --name dev \
-       wkok/dev:2022-08-23
+       wkok/dev:2022-10-22
