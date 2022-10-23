@@ -82,6 +82,7 @@ RUN curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/scrip
 # Install Java Development Tools lsp server #
 #############################################
 RUN wget -O /tmp/jdt-ls.tar.gz https://download.eclipse.org/jdtls/milestones/$JDT_LSP_VERSION/jdt-language-server-$JDT_LSP_VERSION-$JDT_LSP_BUILD.tar.gz && \
+    mkdir -p /opt/jdt-ls && \
     tar -xf /tmp/jdt-ls.tar.gz -C /opt/jdt-ls && \
     ln -s /opt/jdt-ls/bin/jdtls /usr/local/bin/jdtls
 
@@ -146,6 +147,7 @@ RUN echo "Match User $USER" >> /etc/ssh/sshd_config && \
 ###########
 RUN rm /tmp/emacs.tar.gz && \
     rm -rf /tmp/emacs-$EMACS_VERSION && \
+    rm /tmp/jdt-ls.tar.gz && \
     rm /tmp/clojure-lsp.zip && \
     rm -rf /var/lib/apt/lists/*
 

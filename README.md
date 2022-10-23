@@ -4,16 +4,17 @@ My emacs + clojure development docker container image
 
 ## Contents
 
-- Emacs 28.1
-- Open JDK 17
-- Clojure 1.11
-- Clojure LSP 2022.05.31-17.35.50
-- Babashka 0.8.157
-- CLJ Kondo 2022.09.08
-- Node 16
-- Yarn 1.22.19
-- Firebase CLI
-- PlantUML 1.2022.6
+- EMACS_VERSION=28.2
+- JAVA_VERSION=17
+- CLOJURE_VERSION=1.11.1.1165
+- CLOJURE_LSP_VERSION=2022.10.05-16.39.51
+- BABASHKA_VERSION=1.0.164
+- CLJ_KONDO_VERSION=2022.10.14
+- NODE_VERSION=16.x
+- PLANTUML_VERSION=1.2022.8
+- YARN_VERSION=1.22.19
+- JDT_LSP_VERSION=1.16.0
+- JDT_LSP_BUILD=202209291445
 
 ## Why
 
