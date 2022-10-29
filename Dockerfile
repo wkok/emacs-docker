@@ -41,7 +41,7 @@ WORKDIR /tmp/emacs-$EMACS_VERSION
 # Compile and install emacs #
 #############################
 RUN ./autogen.sh && \
-    ./configure --with-native-compilation --with-json && \
+    ./configure --with-native-compilation --with-json --with-imagemagick && \
     make -j8 && \
     make install
 
