@@ -9,7 +9,7 @@ ENV LANG=en_US.UTF-8
 ARG EMACS_VERSION=28.2
 ARG JAVA_VERSION=17
 ARG CLOJURE_VERSION=1.11.1.1208
-ARG CLOJURE_LSP_VERSION=2022.12.09-15.51.10
+ARG CLOJURE_LSP_VERSION=2022.11.03-00.14.57
 ARG BABASHKA_VERSION=1.0.169
 ARG CLJ_KONDO_VERSION=2023.01.12
 ARG NODE_VERSION=18.x
@@ -60,6 +60,11 @@ RUN curl -O https://download.clojure.org/install/linux-install-$CLOJURE_VERSION.
 RUN chmod +x linux-install-$CLOJURE_VERSION.sh
 RUN ./linux-install-$CLOJURE_VERSION.sh && \
     rm ./linux-install-$CLOJURE_VERSION.sh
+
+####################
+# Install deps-new #
+####################
+RUN clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.13"}' :as new
 
 ##############################
 # Install clojure-lsp native #
