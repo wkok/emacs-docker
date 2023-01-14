@@ -16,9 +16,13 @@
 #############################################################
 
 docker run -it --privileged --rm \
+       -e XDG_RUNTIME_DIR=/tmp \
+       -e XDG_SESSION_TYPE=wayland \
+       -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+       -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY  \
        -v /tmp/.X11-unix:/tmp/.X11-unix \
-       -v /home/wrk:/home/developer \
        -e DISPLAY=$DISPLAY \
+       -v /home/wrk:/home/developer \
        -p 8280:8280 \
        -p 9630:9630 \
        -p 9005:9005 \
@@ -27,4 +31,4 @@ docker run -it --privileged --rm \
        -p 22:22 \
        --user 1000 \
        --name dev \
-       wkok/dev:2023-01-14
+       wkok/dev:2023-02-09-pgtk
