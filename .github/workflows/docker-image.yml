@@ -19,8 +19,14 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/dev:$(date +'%Y-%m-%d')
+    - name: Build the pgtk Docker image
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/dev:$(date +'%Y-%m-%d')-pgtk --build-arg EMACS_GUI=pgtk
 
-    - name: Push the Docker image
-      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/dev:$(date +'%Y-%m-%d')
+    - name: Push the pgtk Docker image
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/dev:$(date +'%Y-%m-%d')-pgtk
+
+    - name: Build the x11 Docker image
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/dev:$(date +'%Y-%m-%d')-x11 --build-arg EMACS_GUI=x11
+
+    - name: Push the x11 Docker image
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/dev:$(date +'%Y-%m-%d')-x11

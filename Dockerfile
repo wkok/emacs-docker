@@ -6,7 +6,7 @@ ENV LANG=en_US.UTF-8
 # Ref: https://batsov.com/articles/2021/12/19/building-emacs-from-source-with-pgtk/ #
 #####################################################################################
 
-ARG EMACS_VERSION=28.2
+ARG EMACS_VERSION=29
 ARG JAVA_VERSION=17
 ARG CLOJURE_VERSION=1.11.1.1208
 ARG CLOJURE_LSP_VERSION=2022.11.03-00.14.57
@@ -29,23 +29,28 @@ ARG CC=/usr/bin/gcc-10 CXX=/usr/bin/gcc-10
 ## Download dependencies ##
 ###########################
 RUN apt-get update && \
-    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server chromium postgresql-client maven
+    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server chromium postgresql-client maven locales locales-all
 
-##############################
-# Download and extract emacs #
-##############################
-RUN wget -O /tmp/emacs.tar.gz http://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz && \
-    tar -xf /tmp/emacs.tar.gz -C /tmp
+###########
+# Locales #
+###########
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
 
-WORKDIR /tmp/emacs-$EMACS_VERSION
+###################################
+# Clone emacs and checkout branch #
+###################################
+RUN git clone git://git.sv.gnu.org/emacs.git /tmp/emacs-$EMACS_VERSION && \
+    cd /tmp/emacs-$EMACS_VERSION && \
+    git checkout origin/emacs-29
 
 #############################
 # Compile and install emacs #
 #############################
-RUN ./autogen.sh && \
-    ./configure --with-native-compilation --with-json && \
-    make -j8 && \
-    make install
+ARG EMACS_GUI
+COPY compile-emacs.sh /compile-emacs.sh
+RUN ./compile-emacs.sh
 
 ##################
 # Install NodeJS #
@@ -77,6 +82,12 @@ RUN unzip /tmp/clojure-lsp.zip -d /usr/local/bin
 ####################
 RUN wget -O /tmp/babashka.tar.gz https://github.com/babashka/babashka/releases/download/v$BABASHKA_VERSION/babashka-$BABASHKA_VERSION-linux-amd64.tar.gz && \
     tar -xf /tmp/babashka.tar.gz -C /usr/local/bin
+
+#####################
+# Install Leiningen #
+#####################
+RUN wget -O /usr/local/bin/lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
+    chmod a+x /usr/local/bin/lein
 
 #####################
 # Install clj-kondo #
@@ -152,10 +163,10 @@ RUN echo "Match User $USER" >> /etc/ssh/sshd_config && \
 ###########
 # Cleanup #
 ###########
-RUN rm /tmp/emacs.tar.gz && \
-    rm -rf /tmp/emacs-$EMACS_VERSION && \
+RUN rm -rf /tmp/emacs-$EMACS_VERSION && \
     rm /tmp/jdt-ls.tar.gz && \
     rm /tmp/clojure-lsp.zip && \
+    rm /compile-emacs.sh && \
     rm -rf /var/lib/apt/lists/*
 
 ENV HOME /home/$USER
