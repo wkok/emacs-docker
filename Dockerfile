@@ -15,8 +15,6 @@ ARG CLJ_KONDO_VERSION=2023.01.12
 ARG NODE_VERSION=18.x
 ARG PLANTUML_VERSION=1.2023.0
 ARG YARN_VERSION=1.22.19
-ARG JDT_LSP_VERSION=1.18.0
-ARG JDT_LSP_BUILD=202212011657
 
 ARG USER=developer
 
@@ -96,14 +94,6 @@ RUN curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/scrip
     chmod +x install-clj-kondo && \
     ./install-clj-kondo --version $CLJ_KONDO_VERSION
 
-#############################################
-# Install Java Development Tools lsp server #
-#############################################
-RUN wget -O /tmp/jdt-ls.tar.gz https://download.eclipse.org/jdtls/milestones/$JDT_LSP_VERSION/jdt-language-server-$JDT_LSP_VERSION-$JDT_LSP_BUILD.tar.gz && \
-    mkdir -p /opt/jdt-ls && \
-    tar -xf /tmp/jdt-ls.tar.gz -C /opt/jdt-ls && \
-    ln -s /opt/jdt-ls/bin/jdtls /usr/local/bin/jdtls
-
 ###########################
 # Install bash lsp server #
 ###########################
@@ -164,7 +154,6 @@ RUN echo "Match User $USER" >> /etc/ssh/sshd_config && \
 # Cleanup #
 ###########
 RUN rm -rf /tmp/emacs-$EMACS_VERSION && \
-    rm /tmp/jdt-ls.tar.gz && \
     rm /tmp/clojure-lsp.zip && \
     rm /compile-emacs.sh && \
     rm -rf /var/lib/apt/lists/*

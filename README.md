@@ -13,8 +13,6 @@ My emacs + clojure development docker container image
 - NODE_VERSION=18.x
 - PLANTUML_VERSION=1.2023.0
 - YARN_VERSION=1.22.19
-- JDT_LSP_VERSION=1.18.0
-- JDT_LSP_BUILD=202212011657
 
 ## Why
 
