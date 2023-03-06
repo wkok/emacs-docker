@@ -12,7 +12,7 @@ ARG CLOJURE_VERSION=1.11.1.1208
 ARG CLOJURE_LSP_VERSION=2022.11.03-00.14.57
 ARG BABASHKA_VERSION=1.0.169
 ARG CLJ_KONDO_VERSION=2023.01.12
-ARG NODE_VERSION=18.x
+ARG NODE_VERSION=16.x
 ARG PLANTUML_VERSION=1.2023.0
 ARG YARN_VERSION=1.22.19
 
@@ -27,7 +27,7 @@ ARG CC=/usr/bin/gcc-10 CXX=/usr/bin/gcc-10
 ## Download dependencies ##
 ###########################
 RUN apt-get update && \
-    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server chromium postgresql-client maven locales locales-all
+    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server chromium postgresql-client maven locales locales-all markdown
 
 ###########
 # Locales #
@@ -55,6 +55,11 @@ RUN ./compile-emacs.sh
 ##################
 RUN curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION | bash -
 RUN apt-get install -y nodejs
+
+################
+# Install nvm  #
+################
+RUN curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash -
 
 ###################
 # Install clojure #

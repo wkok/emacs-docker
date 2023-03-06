@@ -28,6 +28,7 @@ docker run -it --privileged --rm \
        -p 9005:9005 \
        -p 2021:2021 \
        -p 9032:9032 \
+       -p 19006:19006 \
        -p 22:22 \
        --user 1000 \
        --name dev \
