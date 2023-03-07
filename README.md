@@ -2,18 +2,6 @@
 
 My emacs + clojure development docker container image
 
-## Contents
-
-- EMACS_VERSION=28.2
-- JAVA_VERSION=17
-- CLOJURE_VERSION=1.11.1.1208
-- CLOJURE_LSP_VERSION=2022.11.03-00.14.57
-- BABASHKA_VERSION=1.0.169
-- CLJ_KONDO_VERSION=2023.01.12
-- NODE_VERSION=18.x
-- PLANTUML_VERSION=1.2023.0
-- YARN_VERSION=1.22.19
-
 ## Why
 
 Ensures a consistent development environment across workstations
