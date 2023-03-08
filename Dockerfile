@@ -42,6 +42,23 @@ ENV LANGUAGE en_US.UTF-8
 RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
 
+#####################################################################################################################
+# Install tree-sitter                                                                                               #
+# See: https://git.savannah.gnu.org/cgit/emacs.git/tree/admin/notes/tree-sitter/starter-guide?h=feature/tree-sitter #
+#####################################################################################################################
+RUN git clone https://github.com/tree-sitter/tree-sitter.git /tmp/tree-sitter && \
+    cd /tmp/tree-sitter && \
+    make && \
+    make install
+
+############################################
+# Install tree-sitter language definitions #
+############################################
+RUN git clone git@github.com:casouri/tree-sitter-module.git /tmp/tree-sitter-module && \
+    cd /tmp/tree-sitter-module && \
+    ./batch.sh && \
+    cp /tmp/tree-sitter-module/dist/* /usr/local/lib/
+
 ###################################
 # Clone emacs and checkout branch #
 ###################################
@@ -168,6 +185,9 @@ RUN rm -rf /tmp/emacs-$EMACS_VERSION && \
     rm /tmp/clojure-lsp.zip && \
     rm /compile-emacs.sh && \
     rm google-chrome-stable_current_amd64.deb && \
+    rm /tmp/babashka.tar.gz && \
+    rm -rf /tmp/tree-sitter && \
+    rm -rf /tmp/tree-sitter-module && \
     rm -rf /var/lib/apt/lists/*
 
 ENV HOME /home/$USER

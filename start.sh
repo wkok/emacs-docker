@@ -29,7 +29,8 @@ docker run -it --privileged --rm \
        -p 2021:2021 \
        -p 9032:9032 \
        -p 19006:19006 \
+       -p 19000:19000 \
        -p 22:22 \
        --user 1000 \
        --name dev \
-       wkok/dev:2023-02-09-pgtk
+       wkok/dev:2023-03-08-pgtk
