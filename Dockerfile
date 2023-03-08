@@ -46,8 +46,8 @@ RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
 # Install tree-sitter                                                                                               #
 # See: https://git.savannah.gnu.org/cgit/emacs.git/tree/admin/notes/tree-sitter/starter-guide?h=feature/tree-sitter #
 #####################################################################################################################
-RUN git clone https://github.com/tree-sitter/tree-sitter.git /tmp/tree-sitter && \
-    cd /tmp/tree-sitter && \
+RUN git clone https://github.com/tree-sitter/tree-sitter.git /opt/tree-sitter && \
+    cd /opt/tree-sitter && \
     make && \
     make install
 
@@ -186,7 +186,6 @@ RUN rm -rf /tmp/emacs-$EMACS_VERSION && \
     rm /compile-emacs.sh && \
     rm google-chrome-stable_current_amd64.deb && \
     rm /tmp/babashka.tar.gz && \
-    rm -rf /tmp/tree-sitter && \
     rm -rf /tmp/tree-sitter-module && \
     rm -rf /var/lib/apt/lists/*
 
