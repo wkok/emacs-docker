@@ -54,7 +54,7 @@ RUN git clone https://github.com/tree-sitter/tree-sitter.git /tmp/tree-sitter &&
 ############################################
 # Install tree-sitter language definitions #
 ############################################
-RUN git clone git@github.com:casouri/tree-sitter-module.git /tmp/tree-sitter-module && \
+RUN git clone https://github.com/casouri/tree-sitter-module.git /tmp/tree-sitter-module && \
     cd /tmp/tree-sitter-module && \
     ./batch.sh && \
     cp /tmp/tree-sitter-module/dist/* /usr/local/lib/
