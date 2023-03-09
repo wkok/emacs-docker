@@ -50,10 +50,7 @@ RUN git clone https://github.com/tree-sitter/tree-sitter.git /tmp/tree-sitter &&
     cd /tmp/tree-sitter && \
     make && \
     make install && \
-    rm /usr/local/lib/libtree-sitter.so.0 && \
-    cp /usr/local/lib/libtree-sitter.so.0.0 /usr/local/lib/libtree-sitter.so.0 && \
-    cp /usr/local/lib/libtree-sitter.so.0 /usr/lib/libtree-sitter.so.0 && \
-    cp /usr/local/lib/libtree-sitter.so.0 /lib/libtree-sitter.so.0
+    cp /usr/local/lib/libtree-sitter* /usr/lib
 
 ############################################
 # Install tree-sitter language definitions #
@@ -61,7 +58,7 @@ RUN git clone https://github.com/tree-sitter/tree-sitter.git /tmp/tree-sitter &&
 RUN git clone https://github.com/casouri/tree-sitter-module.git /tmp/tree-sitter-module && \
     cd /tmp/tree-sitter-module && \
     ./batch.sh && \
-    cp /tmp/tree-sitter-module/dist/* /usr/local/lib/
+    cp /tmp/tree-sitter-module/dist/* /usr/lib/
 
 ###################################
 # Clone emacs and checkout branch #
