@@ -33,4 +33,4 @@ docker run -it --privileged --rm \
        -p 22:22 \
        --user 1000 \
        --name dev \
-       wkok/dev:2023-03-08-pgtk
+       wkok/dev:2023-03-09-pgtk
