@@ -57,7 +57,8 @@ RUN git clone https://github.com/tree-sitter/tree-sitter.git /tmp/tree-sitter &&
 ############################################
 RUN git clone https://github.com/casouri/tree-sitter-module.git /tmp/tree-sitter-module && \
     cd /tmp/tree-sitter-module && \
-    ./batch.sh && \
+    ./build.sh typescript && \
+    ./build.sh javascript && \
     cp /tmp/tree-sitter-module/dist/* /usr/lib/
 
 ###################################
