@@ -54,11 +54,12 @@ RUN git clone https://github.com/tree-sitter/tree-sitter.git /tmp/tree-sitter &&
 
 ############################################
 # Install tree-sitter language definitions #
+#    ./build.sh typescript && \
+#    ./build.sh javascript && \
 ############################################
 RUN git clone https://github.com/casouri/tree-sitter-module.git /tmp/tree-sitter-module && \
     cd /tmp/tree-sitter-module && \
-    ./build.sh typescript && \
-    ./build.sh javascript && \
+    ./batch.sh && \
     cp /tmp/tree-sitter-module/dist/* /usr/lib/
 
 ###################################
