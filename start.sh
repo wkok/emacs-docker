@@ -33,4 +33,5 @@ docker run -it --privileged --rm \
        -p 22:22 \
        --user 1000 \
        --name dev \
-       wkok/dev:2023-03-11-pgtk
+       --cpu-shares 102400 \
+       wkok/dev:2023-03-27-pgtk
