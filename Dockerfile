@@ -15,6 +15,8 @@ ARG CLJ_KONDO_VERSION=2023.01.12
 ARG NODE_VERSION=16.x
 ARG PLANTUML_VERSION=1.2023.0
 ARG YARN_VERSION=1.22.19
+ARG FLUTTER_VERSION=3.7.9
+ARG ANDROID_STUDIO_VERSION=2022.1.1.21
 
 ARG USER=developer
 
@@ -27,7 +29,7 @@ ARG CC=/usr/bin/gcc-10 CXX=/usr/bin/gcc-10
 ## Download dependencies ##
 ###########################
 RUN apt-get update && \
-    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server postgresql-client maven locales locales-all markdown pulseaudio
+    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server postgresql-client maven locales locales-all markdown pulseaudio clang cmake ninja-build
 
 ###########
 # Locales #
@@ -161,6 +163,20 @@ RUN mkdir -p /opt/plantuml && \
 ########
 RUN npm install --global yarn@$YARN_VERSION
 
+##########################
+# Install Android Studio #
+##########################
+RUN mkdir -p /opt/android-studio && \
+    wget -O /tmp/android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/$ANDROID_STUDIO_VERSION/android-studio-$ANDROID_STUDIO_VERSION-linux.tar.gz && \
+    tar xf /tmp/android-studio.tar.gz -C /opt/
+
+###################
+# Install Flutter #
+###################
+RUN mkdir -p /opt/flutter && \
+    wget -O /tmp/flutter.tar.gz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$FLUTTER_VERSION-stable.tar.xz && \
+    tar xf /tmp/flutter.tar.gz -C /opt/
+
 #######################
 # Set up user profile #
 #######################
@@ -186,6 +202,8 @@ RUN echo "Match User $USER" >> /etc/ssh/sshd_config && \
 ###########
 RUN rm -rf /tmp/emacs-$EMACS_VERSION && \
     rm /tmp/clojure-lsp.zip && \
+    rm /tmp/flutter.tar.gz && \
+    rm /tmp/android-studio.tar.gz && \
     rm /compile-emacs.sh && \
     rm google-chrome-stable_current_amd64.deb && \
     rm /tmp/babashka.tar.gz && \
