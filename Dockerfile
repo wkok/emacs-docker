@@ -29,7 +29,7 @@ ARG CC=/usr/bin/gcc-10 CXX=/usr/bin/gcc-10
 ## Download dependencies ##
 ###########################
 RUN apt-get update && \
-    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server postgresql-client maven locales locales-all markdown pulseaudio clang cmake ninja-build
+    apt install -y build-essential libgtk-3-dev libgnutls28-dev libtiff5-dev libgif-dev libjpeg-dev libpng-dev libxpm-dev libncurses-dev texinfo autoconf libjansson4 libjansson-dev libgccjit0 libgccjit-10-dev gcc-10 g++-10 wget git ispell unzip openjdk-$JAVA_VERSION-jdk curl rlwrap sudo silversearcher-ag ncat pass telnet graphviz openssh-server postgresql-client maven locales locales-all markdown pulseaudio clang cmake ninja-build pkg-config liblzma-dev libstdc++-12-dev
 
 ###########
 # Locales #
@@ -175,7 +175,8 @@ RUN mkdir -p /opt/android-studio && \
 ###################
 RUN mkdir -p /opt/flutter && \
     wget -O /tmp/flutter.tar.gz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$FLUTTER_VERSION-stable.tar.xz && \
-    tar xf /tmp/flutter.tar.gz -C /opt/
+    tar xf /tmp/flutter.tar.gz -C /opt/ && \
+    /opt/flutter/bin/flutter precache
 
 #######################
 # Set up user profile #
