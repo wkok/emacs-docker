@@ -33,4 +33,4 @@ docker run -it --privileged --rm \
        -p 22:22 \
        --user 1000 \
        --name dev \
-       wkok/dev:2023-04-05-x11
+       wkok/dev:2023-04-11-x11
