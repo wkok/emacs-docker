@@ -18,7 +18,7 @@ ARG YARN_VERSION=1.22.19
 ARG FLUTTER_VERSION=3.7.9
 ARG ANDROID_STUDIO_VERSION=2022.1.1.21
 
-ARG USER=wrk
+ARG USER=wkok
 
 #######################################
 # Needed for emacs native compilation #
