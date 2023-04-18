@@ -15,8 +15,8 @@ ARG CLJ_KONDO_VERSION=2023.03.17
 ARG NODE_VERSION=16.x
 ARG PLANTUML_VERSION=1.2023.5
 ARG YARN_VERSION=1.22.19
-ARG FLUTTER_VERSION=3.7.9
-ARG ANDROID_STUDIO_VERSION=2022.1.1.21
+ARG FLUTTER_VERSION=3.7.11
+ARG ANDROID_STUDIO_VERSION=2022.2.1.18
 
 ARG USER=wkok
 
@@ -166,17 +166,17 @@ RUN npm install --global yarn@$YARN_VERSION
 ##########################
 # Install Android Studio #
 ##########################
-# RUN mkdir -p /opt/android-studio && \
-#     wget -O /tmp/android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/$ANDROID_STUDIO_VERSION/android-studio-$ANDROID_STUDIO_VERSION-linux.tar.gz && \
-#     tar xf /tmp/android-studio.tar.gz -C /opt/
+RUN mkdir -p /opt/android-studio && \
+     wget -O /tmp/android-studio.tar.gz https://redirector.gvt1.com/edgedl/android/studio/ide-zips/$ANDROID_STUDIO_VERSION/android-studio-$ANDROID_STUDIO_VERSION-linux.tar.gz && \
+     tar xf /tmp/android-studio.tar.gz -C /opt/
 
 ###################
 # Install Flutter #
 ###################
-# RUN mkdir -p /opt/flutter && \
-#     wget -O /tmp/flutter.tar.gz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$FLUTTER_VERSION-stable.tar.xz && \
-#     tar xf /tmp/flutter.tar.gz -C /opt/ && \
-#     /opt/flutter/bin/flutter precache
+RUN mkdir -p /opt/flutter && \
+     wget -O /tmp/flutter.tar.gz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$FLUTTER_VERSION-stable.tar.xz && \
+     tar xf /tmp/flutter.tar.gz -C /opt/ && \
+     /opt/flutter/bin/flutter precache
 
 #######################
 # Set up user profile #
@@ -203,8 +203,8 @@ RUN echo "Match User $USER" >> /etc/ssh/sshd_config && \
 ###########
 RUN rm -rf /tmp/emacs-$EMACS_VERSION && \
     rm /tmp/clojure-lsp.zip && \
-    # rm /tmp/flutter.tar.gz && \
-    # rm /tmp/android-studio.tar.gz && \
+    rm /tmp/flutter.tar.gz && \
+    rm /tmp/android-studio.tar.gz && \
     rm /compile-emacs.sh && \
     rm google-chrome-stable_current_amd64.deb && \
     rm /tmp/babashka.tar.gz && \
