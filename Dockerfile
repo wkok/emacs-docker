@@ -176,8 +176,7 @@ RUN mkdir -p /opt/android-studio && \
 RUN mkdir -p /opt/flutter && \
     wget -O /tmp/flutter.tar.gz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$FLUTTER_VERSION-stable.tar.xz && \
     tar xf /tmp/flutter.tar.gz -C /opt/ && \
-    /opt/flutter/bin/flutter precache && \
-    sudo chown -R $USER /opt/flutter/
+    /opt/flutter/bin/flutter precache
 
 #######################
 # Set up user profile #
@@ -198,6 +197,9 @@ RUN echo "Match User $USER" >> /etc/ssh/sshd_config && \
     echo "	X11DisplayOffset 10" >> /etc/ssh/sshd_config && \
     echo "	X11UseLocalhost no" >> /etc/ssh/sshd_config && \
     echo "	X11Forwarding yes" >> /etc/ssh/sshd_config
+
+## opt permissions
+RUN chown -R $USER /opt
 
 ###########
 # Cleanup #
